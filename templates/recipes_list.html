@@ -6,13 +6,7 @@
     <ul>
         {% for recipe in recipes %}
             <li>
-                <h3>{{ recipe.name }}</h3>
-                <ul>
-                    {% for ingredient in recipe.ingredients %}
-                        <li>{{ ingredient.name }} - {{ ingredient.quantity }}</li>
-                    {% endfor %}
-                </ul>
-                <h3><a href="{{ recipe.link }}">Link to Recipe</a></h3>
+                <h3><a href="/ledger{{ recipe.link }}">{{ recipe.name }}</a></h3>
             </li>
         {% endfor %}
     </ul>
