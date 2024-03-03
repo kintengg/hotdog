@@ -4,9 +4,9 @@
 {% block content %}
     <h2>Recipes List</h2>
     <ul>
-        {% for recipe in recipes %}
+        {% for recipes in object_list %}
             <li>
-                <h3><a href="/ledger{{ recipe.link }}">{{ recipe.name }}</a></h3>
+                <h3><a href="{{ recipes.get_absolute_url }}">{{ recipes }}</a></h3>
             </li>
         {% endfor %}
     </ul>
