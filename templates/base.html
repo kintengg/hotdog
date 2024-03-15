@@ -7,7 +7,20 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-    <header><h1>Recipe Book</h1></header>
+    <header>
+        <h1>Recipe Book</h1>
+        {% if request.user.is_authenticated %}
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+        {% else %}
+            {% if request.get_full_path != '/accounts/login/' %}
+                <a href="{% url 'login' %}">Login</a>
+            {% endif %}
+        {% endif %}
+        <h2>{% block page %}{% endblock %}</h2>
+    </header>
     <div id="content">
         {% block content %}{% endblock %}
     </div>
