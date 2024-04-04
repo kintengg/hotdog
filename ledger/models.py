@@ -3,7 +3,7 @@ from django.urls import reverse
 
 from datetime import datetime
 
-from accounts import models as profile_models
+from accounts.models import Profile
 
 
 class Ingredient(models.Model):
@@ -19,9 +19,7 @@ class Ingredient(models.Model):
 class Recipe(models.Model):
     name = models.CharField(max_length=100)
     author = models.ForeignKey(
-        profile_models.Profile,
-        db_column="user",
-        null=True,
+        Profile,
         on_delete=models.CASCADE,
         related_name="profile"
     )
@@ -50,3 +48,13 @@ class RecipeIngredient(models.Model):
         on_delete=models.CASCADE,
         related_name="ingredients"
         )
+    
+
+class RecipeImage(models.Model):
+    image = models.ImageField(upload_to="images/", null=True)
+    description = models.TextField(max_length=255)
+    recipe = models.ForeignKey(
+        'Recipe',
+        on_delete=models.CASCADE,
+        related_name="images"
+    )
