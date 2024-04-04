@@ -13,7 +13,7 @@ class Ingredient(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('ledger:recipes-list', args=[self.pk])
+        return reverse('ledger:recipes_list', args=[self.pk])
 
 
 class Recipe(models.Model):
@@ -30,8 +30,8 @@ class Recipe(models.Model):
         return '{}' .format(self.name)
 
     def get_absolute_url(self):
-        return reverse('ledger:recipe-details', args=[self.pk])
-    
+        return reverse('ledger:recipe_detail', args=[self.pk])
+
     class Meta:
         ordering = ['name']
 
@@ -42,19 +42,19 @@ class RecipeIngredient(models.Model):
         'Ingredient',
         on_delete=models.CASCADE,
         related_name="recipe"
-        )
+    )
     recipe = models.ForeignKey(
         'Recipe',
         on_delete=models.CASCADE,
         related_name="ingredients"
-        )
-    
+    )
+
 
 class RecipeImage(models.Model):
-    image = models.ImageField(upload_to="images/", null=True)
+    image = models.ImageField(upload_to="images/")
     description = models.TextField(max_length=255)
     recipe = models.ForeignKey(
         'Recipe',
         on_delete=models.CASCADE,
-        related_name="images"
+        related_name="image"
     )
