@@ -4,7 +4,7 @@
     Recipes List
 {% endblock %}
 {% block page %}
-    You are viewing Recipes List
+    You are viewing: Recipes List
 {% endblock %}
 {% block content %}
     <h3>Recipes List</h3>
@@ -15,4 +15,5 @@
             </li>
         {% endfor %}
     </ul>
+    <h4><a href="{% url 'ledger:recipe_create' %}">Add Recipe</a></h4>
 {% endblock %}

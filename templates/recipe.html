@@ -3,8 +3,18 @@
 {% block title %}
     {{ recipe.name }}
 {% endblock %}
+{% block styles %}
+    <style>
+        img{
+            width: 100%;
+            height: auto;
+            max-width: 500px;
+            max-height: 500px;
+        }
+    </style>
+{% endblock %}
 {% block page %}
-    You are viewing Recipe Details
+    You are viewing: {{ recipe.name }} Recipe
 {% endblock %}
 {% block content %}
     <h3>by {{ recipe.author }}</h3>
@@ -13,5 +23,9 @@
             <li>{{ ingredient.ingredient.name }} - {{ ingredient.quantity }}</li>
         {% endfor %}
     </ul>
+    {% for image in recipe.image.all %}
+        <img src="{{ image.image.url }}" alt="{{ image.description }}">
+    {% endfor %}
+    <h4><a href="{% url 'ledger:recipe_add_image' pk=recipe.pk %}">Add Image</a></h4>
     <h3><a href="/recipes/list">Link to Recipe List</a></h3>
 {% endblock %}

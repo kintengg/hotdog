@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Add Recipe{% endblock %}
+{% block page %}You are viewing: Create Recipe{% endblock %}
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Create Recipe</button>
+    </form>
+    <h3><a href="{% url 'ledger:recipes_list' %}">Cancel</a></h3>
+{% endblock content %}
