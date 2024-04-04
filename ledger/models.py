@@ -3,6 +3,8 @@ from django.urls import reverse
 
 from datetime import datetime
 
+from accounts import models as profile_models
+
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=100)
@@ -16,7 +18,13 @@ class Ingredient(models.Model):
 
 class Recipe(models.Model):
     name = models.CharField(max_length=100)
-    author = models.CharField(max_length=50, default='author')
+    author = models.ForeignKey(
+        profile_models.Profile,
+        db_column="user",
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="profile"
+    )
     created_on = models.DateTimeField(default=datetime.now, blank=True)
     updated_on = models.DateTimeField(auto_now=True)
 
